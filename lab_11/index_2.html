@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перетягування</title>
+    <style>
+        #container {
+            width: 500px;
+            height: 500px;
+            background-color: grey;
+            position: relative;
+        }
+        #kv {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="init()">
+<h2 align="center" style="color: #ff00ff">Перетаскування квадрата мишкою</h2>
+<h3 align="center">Встановіть курсор всередині червоного квадрата, натисніть ліву кнопку мишки і тягніть квадрат.<br>Для звільнення квадрата від захоплення відпустіть мишку</h3>
+<p align="right">Примітка. Сторінка правильно відображається в браузерах <i>Mozilla Firefox</i> і <i>Internet Explorer</i></p>
+
+<div id="container">
+    <div id="kv"></div>
+</div>
+
+<script>
+    let flag = false;
+    let offsetX, offsetY;
+
+    function init() {
+        const kv = document.getElementById('kv');
+        kv.onmousedown = zachvat;
+        document.onmousemove = dragIt;
+        document.onmouseup = osvobodi;
+    }
+
+    function zachvat(evt) {
+        flag = true;
+        const e = evt || window.event;
+        offsetX = e.clientX - kv.offsetLeft;
+        offsetY = e.clientY - kv.offsetTop;
+    }
+
+    function dragIt(evt) {
+        if (!flag) return;
+        const e = evt || window.event;
+        const container = document.getElementById("container");
+        const kv = document.getElementById("kv");
+
+        let newX = e.clientX - offsetX - container.offsetLeft;
+        let newY = e.clientY - offsetY - container.offsetTop;
+
+        const maxX = container.clientWidth - kv.offsetWidth;
+        const maxY = container.clientHeight - kv.offsetHeight;
+
+        if (newX < 0) newX = 0;
+        if (newY < 0) newY = 0;
+        if (newX > maxX) newX = maxX;
+        if (newY > maxY) newY = maxY;
+
+        kv.style.left = newX + "px";
+        kv.style.top = newY + "px";
+    }
+
+    function osvobodi() {
+        flag = false;
+    }
+</script>
+</body>
+</html>

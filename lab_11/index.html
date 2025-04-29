@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Круговий рух квадрата</title>
+    <style>
+        #square {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="square"></div>
+
+<script>
+    const square = document.getElementById("square");
+    const R = 100;
+    let angle = 0;
+
+    function moveInCircle() {
+        const centerX = 200;
+        const centerY = 200;
+        const x = centerX + R * Math.cos(angle);
+        const y = centerY + R * Math.sin(angle);
+        square.style.left = x + "px";
+        square.style.top = y + "px";
+        angle += 0.05;
+        if (angle >= 2 * Math.PI) angle = 0;
+    }
+
+    setInterval(moveInCircle, 30);
+</script>
+</body>
+</html>
