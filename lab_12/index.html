@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Тригонометричні функції</title>
+    <script>
+        function isNumb(fld) {
+            let t = fld.value;
+            for (let i = 0; i < t.length; i++) {
+                let ch = t.charAt(i);
+                if ((ch < "0" || ch > "9") && !(ch == "," || ch == ".")) {
+                    alert("Не цифра");
+                    fld.focus();
+                    fld.select();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function calculate() {
+            let angleStart = parseFloat(document.getElementById("start").value);
+            let angleEnd = parseFloat(document.getElementById("end").value);
+            let step = parseFloat(document.getElementById("step").value);
+            let func = document.getElementById("func").value;
+
+            if (isNaN(angleStart) || isNaN(angleEnd) || isNaN(step) || step <= 0 || angleStart >= angleEnd) {
+                alert("Введіть правильні значення для кутів і кроку");
+                return;
+            }
+
+            let resultWindow = window.open("", "resultWindow", "width=600,height=400");
+            let htmlContent = "<table border='1'><tr><th>Кут (градуси)</th><th>Кут (радіани)</th><th>" + func + "</th></tr>";
+
+            for (let angle = angleStart; angle <= angleEnd; angle += step) {
+                let rad = angle * Math.PI / 180;
+                let value;
+                if (func == "sin") {
+                    value = Math.sin(rad);
+                } else if (func == "cos") {
+                    value = Math.cos(rad);
+                } else {
+                    value = Math.tan(rad);
+                }
+                htmlContent += "<tr><td>" + angle + "</td><td>" + rad.toFixed(4) + "</td><td>" + value.toFixed(4) + "</td></tr>";
+            }
+
+            htmlContent += "</table>";
+            resultWindow.document.write(htmlContent);
+        }
+    </script>
+</head>
+<body>
+<h1>Тригонометричні функції</h1>
+<label for="start">Початковий кут (градуси):</label>
+<input type="text" id="start" onchange="isNumb(this)">
+<br>
+<label for="end">Кінцевий кут (градуси):</label>
+<input type="text" id="end" onchange="isNumb(this)">
+<br>
+<label for="step">Крок (градуси):</label>
+<input type="text" id="step" onchange="isNumb(this)">
+<br>
+<label for="func">Вибір функції:</label>
+<select id="func">
+    <option value="sin">sin</option>
+    <option value="cos">cos</option>
+    <option value="tg">tg</option>
+</select>
+<br>
+<button onclick="calculate()">Обчислити</button>
+</body>
+</html>

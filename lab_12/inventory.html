@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Облік товарів</title>
+    <script>
+        function updateTable() {
+            let rowCount = document.getElementById("productTable").rows.length;
+            let totalCost = 0;
+
+            for (let i = 1; i < rowCount; i++) {
+                let quantity = parseFloat(document.getElementById("quantity" + i).value);
+                let price = parseFloat(document.getElementById("price" + i).value);
+                if (!isNaN(quantity) && !isNaN(price)) {
+                    let totalPrice = quantity * price;
+                    document.getElementById("totalPrice" + i).innerText = totalPrice.toFixed(2);
+                    totalCost += totalPrice;
+                }
+            }
+
+            document.getElementById("totalCost").innerText = totalCost.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+<h1>Облік товарів</h1>
+<table id="productTable" border="1">
+    <tr>
+        <th>Назва товару</th>
+        <th>Кількість</th>
+        <th>Ціна</th>
+        <th>Сума</th>
+    </tr>
+    <tr>
+        <td>Товар 1</td>
+        <td><input type="text" id="quantity1" value="1" onchange="updateTable()"></td>
+        <td><input type="text" id="price1" value="100" onchange="updateTable()"></td>
+        <td id="totalPrice1">100.00</td>
+    </tr>
+    <tr>
+        <td>Товар 2</td>
+        <td><input type="text" id="quantity2" value="2" onchange="updateTable()"></td>
+        <td><input type="text" id="price2" value="150" onchange="updateTable()"></td>
+        <td id="totalPrice2">300.00</td>
+    </tr>
+</table>
+<h3>Загальна сума: <span id="totalCost">400.00</span></h3>
+</body>
+</html>
