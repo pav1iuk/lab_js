@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Робота з текстом</title>
+</head>
+<body>
+
+<h3>Введіть або змініть текст у блоці:</h3>
+<textarea id="textInput" rows="4" cols="50" oninput="updateElemText()">
+Вміст блока
+  </textarea>
+
+<p id="elem">Вміст блока</p>
+<button onclick="str_del()">ВИДАЛИТИ</button>
+
+<script src="index.js"></script>
+<script>
+  function updateElemText() {
+    document.getElementById("elem").textContent = document.getElementById("textInput").value;
+  }
+</script>
+
+</body>
+</html>
