@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>JS</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        section { margin-bottom: 30px; }
+        input, button, textarea { margin: 5px 0; display: block; }
+        .output { font-weight: bold; color: darkgreen; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+<h1>Head</h1>
+<section>
+    <h2>1.1 Площа прямокутника</h2>
+    <input type="number" id="rectLength" placeholder="Довжина">
+    <input type="number" id="rectWidth" placeholder="Ширина">
+    <button onclick="computeAreaOfARectangle()">Обчислити</button>
+    <div class="output" id="out1"></div>
+</section>
+
+<section>
+    <h2>1.2 Площа круга</h2>
+    <input type="number" id="radius" placeholder="Радіус">
+    <button onclick="computeAreaOfACircle()">Обчислити</button>
+    <div class="output" id="out2"></div>
+</section>
+
+<section>
+    <h2>1.3 Піднесення до степеня</h2>
+    <input type="number" id="base" placeholder="Число">
+    <input type="number" id="exp" placeholder="Степінь">
+    <button onclick="computePower()">Обчислити</button>
+    <div class="output" id="out3"></div>
+</section>
+
+<section>
+    <h2>1.4 Квадратний корінь</h2>
+    <input type="number" id="sqrtNum" placeholder="Число">
+    <button onclick="computeSquareRoot()">Обчислити</button>
+    <div class="output" id="out4"></div>
+</section>
+
+<section>
+    <h2>1.5 Довжина трьох слів</h2>
+    <input type="text" id="word1" placeholder="Слово 1">
+    <input type="text" id="word2" placeholder="Слово 2">
+    <input type="text" id="word3" placeholder="Слово 3">
+    <button onclick="getLengthOfThreeWords()">Обчислити</button>
+    <div class="output" id="out5"></div>
+</section>
+
+<section>
+    <h2>1.6 Об’єднання масивів</h2>
+    <input type="text" id="arr1" placeholder="Масив 1 (через кому)">
+    <input type="text" id="arr2" placeholder="Масив 2 (через кому)">
+    <button onclick="joinArrays()">Об’єднати</button>
+    <div class="output" id="out6"></div>
+</section>
+
+<section>
+    <h2>1.7 Добуток елементів за ключем</h2>
+    <textarea id="obj1" placeholder='{"nums":[1,2,3]}' rows="3"></textarea>
+    <input type="text" id="key1" placeholder="Ключ">
+    <button onclick="getProductOfAllEIementsAtProperty()">Обчислити</button>
+    <div class="output" id="out7"></div>
+</section>
+
+<section>
+    <h2>1.8 Сума цифр числа</h2>
+    <input type="number" id="sumDigitsInput" placeholder="Число">
+    <button onclick="sumDigits()">Обчислити</button>
+    <div class="output" id="out8"></div>
+</section>
+
+<section>
+    <h2>1.9 Найкоротше слово серед елементів</h2>
+    <input type="text" id="mixedWords" placeholder='4, "two", 2, "three"'>
+    <button onclick="findShortestWordAmongMixedElements()">Знайти</button>
+    <div class="output" id="out9"></div>
+</section>
+
+<section>
+    <h2>1.10 Найменше число серед елементів</h2>
+    <input type="text" id="mixedNums" placeholder='4, "two", 2, "three"'>
+    <button onclick="findSmallestNumberAmongMixedElements()">Знайти</button>
+    <div class="output" id="out10"></div>
+</section>
+
+<section>
+    <h2>1.11 Modulo (без %)</h2>
+    <input type="number" id="modA" placeholder="Ділене">
+    <input type="number" id="modB" placeholder="Дільник">
+    <button onclick="modulo()">Обчислити</button>
+    <div class="output" id="out11"></div>
+</section>
+
+<section>
+    <h2>1.12 Дзеркальне відображення фрагментів</h2>
+    <input type="text" id="flipString" placeholder="Рядок">
+    <input type="number" id="flipSize" placeholder="Кожні N символів">
+    <button onclick="reverseChunks()">Перевернути</button>
+    <div class="output" id="out12"></div>
+</section>
+
+<section>
+    <h2>1.13 Унікальне парне/непарне</h2>
+    <input type="text" id="evenOdd" placeholder="Числа через кому">
+    <button onclick="findOddOneOut()">Знайти</button>
+    <div class="output" id="out13"></div>
+</section>
+
+<script>
+    function computeAreaOfARectangle() {
+        let l = +document.getElementById("rectLength").value;
+        let w = +document.getElementById("rectWidth").value;
+        document.getElementById("out1").textContent = `Площа: ${l * w}`;
+    }
+
+    function computeAreaOfACircle() {
+        let r = +document.getElementById("radius").value;
+        document.getElementById("out2").textContent = `Площа: ${(Math.PI * r * r).toFixed(2)}`;
+    }
+
+    function computePower() {
+        let base = +document.getElementById("base").value;
+        let exp = +document.getElementById("exp").value;
+        document.getElementById("out3").textContent = base ** exp;
+    }
+
+    function computeSquareRoot() {
+        let n = +document.getElementById("sqrtNum").value;
+        document.getElementById("out4").textContent = Math.sqrt(n);
+    }
+
+    function getLengthOfThreeWords() {
+        let w1 = document.getElementById("word1").value.trim();
+        let w2 = document.getElementById("word2").value.trim();
+        let w3 = document.getElementById("word3").value.trim();
+        document.getElementById("out5").textContent = w1.length + w2.length + w3.length;
+    }
+
+    function joinArrays() {
+        let a1 = document.getElementById("arr1").value.split(",").map(e => e.trim());
+        let a2 = document.getElementById("arr2").value.split(",").map(e => e.trim());
+        document.getElementById("out6").textContent = JSON.stringify([...a1, ...a2]);
+    }
+
+    function getProductOfAllEIementsAtProperty() {
+        let obj, key;
+        try {
+            obj = JSON.parse(document.getElementById("obj1").value);
+            key = document.getElementById("key1").value;
+            if (!Array.isArray(obj[key]) || obj[key].length === 0) return document.getElementById("out7").textContent = 0;
+            let result = obj[key].reduce((acc, val) => acc * val, 1);
+            document.getElementById("out7").textContent = result;
+        } catch {
+            document.getElementById("out7").textContent = 0;
+        }
+    }
+
+    function sumDigits() {
+        let n = document.getElementById("sumDigitsInput").value;
+        let sign = n < 0 ? -1 : 1;
+        n = Math.abs(n).toString().split("").reduce((acc, d) => acc + +d, 0);
+        document.getElementById("out8").textContent = sign < 0 ? -n + 2 * (+String(document.getElementById("sumDigitsInput").value)[1]) : n;
+    }
+
+    function findShortestWordAmongMixedElements() {
+        let arr = eval("[" + document.getElementById("mixedWords").value + "]");
+        let strings = arr.filter(el => typeof el === "string");
+        if (strings.length === 0) return document.getElementById("out9").textContent = "";
+        strings.sort((a, b) => a.length - b.length);
+        document.getElementById("out9").textContent = strings[0];
+    }
+
+    function findSmallestNumberAmongMixedElements() {
+        let arr = eval("[" + document.getElementById("mixedNums").value + "]");
+        let nums = arr.filter(el => typeof el === "number");
+        if (nums.length === 0) return document.getElementById("out10").textContent = "";
+        document.getElementById("out10").textContent = Math.min(...nums);
+    }
+
+    function modulo() {
+        let a = +document.getElementById("modA").value;
+        let b = +document.getElementById("modB").value;
+        let res = (isNaN(a) || isNaN(b) || b === 0) ? NaN : a - Math.floor(a / b) * b;
+        document.getElementById("out11").textContent = res;
+    }
+
+    function reverseChunks() {
+        let str = document.getElementById("flipString").value;
+        let size = +document.getElementById("flipSize").value;
+        if (size <= 1) return document.getElementById("out12").textContent = str;
+        let out = '';
+        for (let i = 0; i < str.length; i += size) {
+            out += str.slice(i, i + size).split("").reverse().join("");
+        }
+        document.getElementById("out12").textContent = out;
+    }
+
+    function findOddOneOut() {
+        let arr = document.getElementById("evenOdd").value.split(",").map(n => +n.trim());
+        let even = arr.filter(n => n % 2 === 0);
+        let odd = arr.filter(n => n % 2 !== 0);
+        let result = even.length === 1 ? even[0] : odd.length === 1 ? odd[0] : "Немає унікального";
+        document.getElementById("out13").textContent = result;
+    }
+</script>
+
+</body>
+</html>
