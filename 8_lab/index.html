@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lab</title>
+    <style>
+        #line2 {
+            font-size: 24pt;
+            color: black;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        #line3, #line4 {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #imgCaption {
+            cursor: pointer;
+        }
+
+        #imgContainer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff00ff;
+        }
+
+        #K1 {
+            position: absolute;
+            left: 50px;
+            top: 200px;
+            width: 300px;
+            height: 100px;
+            background-color: blue;
+        }
+
+        #K2 {
+            position: relative;
+            left: 50px;
+            top: 25px;
+            width: 200px;
+            height: 50px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body id="B" bgcolor="AAAAAA" onclick="rodEl()" style="height: 600px">
+
+<h2>П'ять подій з мишкою</h2>
+<p id="line2" onclick="toggleLine2()">Клацніть на мене мишкою</p>
+<div id="line3" onmousedown="mouseDownLine3()" onmouseup="mouseUpLine3()">На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки</div>
+<div id="line4" onmouseover="mouseOverLine4()" onmouseout="mouseOutLine4()">Повільно проведіть курсором мишки по цій написи</div>
+
+<div id="imgContainer" onclick="swapImageAndCaption()">
+    <img id="img" src="https://via.placeholder.com/150" alt="зображення">
+    <p id="imgCaption" onclick="changeCaptionColor()">Це зображення</p>
+</div>
+
+<h1 id="HH" onclick="H_l()">КОЛІР</h1>
+<div id="K1" onclick="D_l()">
+    <div id="K2" onclick="D_2(this)"></div>
+</div>
+
+<script>
+    let isLine2Active = false;
+
+    function toggleLine2() {
+        if (!isLine2Active) {
+            document.getElementById("line2").style.fontSize = "48pt";
+            document.getElementById("line2").style.color = "white";
+            document.getElementById("line2").style.backgroundColor = "lightblue";
+        } else {
+            document.getElementById("line2").style.fontSize = "24pt";
+            document.getElementById("line2").style.color = "black";
+            document.getElementById("line2").style.backgroundColor = "white";
+        }
+        isLine2Active = !isLine2Active;
+    }
+
+    function mouseDownLine3() {
+        window.event.cancelBubble = true;
+        document.getElementById("line3").style.backgroundColor = "green";
+    }
+
+    function mouseUpLine3() {
+        window.event.cancelBubble = true;
+        document.getElementById("line3").style.backgroundColor = "yellow";
+    }
+
+    function mouseOverLine4() {
+        window.event.cancelBubble = true;
+        document.getElementById("line4").style.backgroundColor = "red";
+    }
+
+    function mouseOutLine4() {
+        window.event.cancelBubble = true;
+        document.getElementById("line4").style.backgroundColor = "lightblue";
+    }
+
+    function changeCaptionColor() {
+        window.event.cancelBubble = true;
+        const caption = document.getElementById("imgCaption");
+        caption.style.color = caption.style.color === "green" ? "black" : "green";
+    }
+
+    function swapImageAndCaption() {
+        const img = document.getElementById("img");
+        const caption = document.getElementById("imgCaption");
+
+        if (img.src.includes("placeholder.com")) {
+            img.src = "https://via.placeholder.com/150/0000FF/FFFFFF?text=Заміна";
+            caption.innerText = "Нове зображення";
+        } else {
+            img.src = "https://via.placeholder.com/150";
+            caption.innerText = "Це зображення";
+        }
+    }
+
+    function rodEl() {
+        var z = document.all.B.bgColor;
+        if (z != "#777777") { z = "#777777"; }
+        else { z = "AAAAAA"; }
+        document.all.B.bgColor = z;
+    }
+
+    function D_l() {
+        window.event.cancelBubble = true;
+        var z = document.all.K1.style.backgroundColor;
+        if (z != "red") z = "red";
+        else z = "green";
+        document.all.K1.style.backgroundColor = z;
+    }
+
+    function D_2(thi) {
+        window.event.cancelBubble = true;
+        var z = thi.style.backgroundColor;
+        if (z == "#ff00ff" || z == 'rgb(255, 0, 255)') { z = "#00ffff"; }
+        else { z = "#ff00ff"; }
+        thi.style.backgroundColor = z;
+    }
+
+    function H_l() {
+        window.event.cancelBubble = true;
+        var z = document.all.HH.style.color;
+        if (z == "#aa00aa" || z == 'rgb(170, 0, 170)') {
+            z = "#00ffff";
+        } else {
+            z = "#aa00aa";
+        }
+        document.all.HH.style.color = z;
+    }
+</script>
+</body>
+</html>
