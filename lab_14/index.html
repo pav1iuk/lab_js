@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Валідація даних у формах</title>
+    <script>
+        function upperCase(str) {
+            if (str.charAt(0) === str.charAt(0).toUpperCase()) {
+                alert("String's starts with uppercase character");
+            } else {
+                alert("String's not starts with uppercase character");
+            }
+        }
+
+        function checkEmail(email) {
+            const regex = /^[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,6}$/;
+            if (regex.test(email)) {
+                alert("true");
+            } else {
+                alert("false");
+            }
+        }
+
+        function findPattern(str) {
+            const regex = /d[b]+d/gi;
+            let result = [...str.matchAll(regex)].map(match => match[0]);
+            alert(JSON.stringify(result));
+        }
+
+        function swapText(str) {
+            const regex = /(\w+)\s+(\w+)/;
+            const result = str.replace(regex, '$2, $1');
+            alert(result);
+        }
+
+        function validateCard(cardNumber) {
+            const regex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+            if (regex.test(cardNumber)) {
+                alert("Valid card number");
+            } else {
+                alert("Invalid card number");
+            }
+        }
+
+        function checkEmailWithRules(email) {
+            const regex = /^(?!-)[A-Za-z0-9_-]+(?<!-)[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]{2,6}$/;
+            if (regex.test(email)) {
+                alert("Email is correct!");
+            } else {
+                alert("Email is not correct!");
+            }
+        }
+
+        function checkLogin(login) {
+            const regex = /^[a-zA-Z][a-zA-Z0-9]{1,9}$/;
+            const numbers = login.match(/[0-9]*\.?[0-9]+/g);
+            if (regex.test(login)) {
+                alert("true");
+                alert(numbers ? numbers.join(', ') : 'No numbers');
+            } else {
+                alert("false");
+                alert(numbers ? numbers.join(', ') : 'No numbers');
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Тестування функцій валідації</h1>
+<button onclick="upperCase('regexp')">Test upperCase('regexp')</button>
+<button onclick="upperCase('RegExp')">Test upperCase('RegExp')</button>
+<button onclick="checkEmail('Qmail2@gmail.com')">Test checkEmail('Qmail2@gmail.com')</button>
+<button onclick="findPattern('cdbBdbsbz')">Test findPattern('cdbBdbsbz')</button>
+<button onclick="swapText('Java Script')">Test swapText('Java Script')</button>
+<button onclick="validateCard('9999-9999-9999-9999')">Test validateCard('9999-9999-9999-9999')</button>
+<button onclick="checkEmailWithRules('my_mail@gmail.com')">Test checkEmailWithRules('my_mail@gmail.com')</button>
+<button onclick="checkLogin('ee1.1ret3')">Test checkLogin('ee1.1ret3')</button>
+<button onclick="checkLogin('ee1*1ret3')">Test checkLogin('ee1*1ret3')</button>
+</body>
+</html>
