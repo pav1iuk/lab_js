@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Tasks</title>
+</head>
+<body>
+<h2>Завдання 1: Робота з вікнами</h2>
+<script>
+    let newWindow = window.open("", "", "width=300,height=300");
+
+    setTimeout(() => {
+        newWindow.resizeTo(500, 500);
+    }, 2000);
+
+    setTimeout(() => {
+        newWindow.moveTo(200, 200);
+    }, 4000);
+
+    setTimeout(() => {
+        newWindow.close();
+    }, 6000);
+</script>
+
+<hr>
+
+<h2>Завдання 2: Зміна стилю</h2>
+<p id="text">I learning JavaScript events!</p>
+<div>
+    <button onclick="changeCSS()">Change style!</button>
+</div>
+
+<script>
+    function changeCSS() {
+        let text = document.getElementById("text");
+        text.style.color = "orange";
+        text.style.fontSize = "20px";
+        text.style.fontFamily = "'Comic Sans MS'";
+    }
+</script>
+
+<hr>
+
+<h2>Завдання 3: Зміна кольору фону</h2>
+<button id="button1">Change to blue</button>
+<button id="button2">Change to pink (double-click)</button>
+<button id="button3">Hold to brown</button>
+<a href="#" id="link">Hover over me!</a>
+
+<script>
+    document.getElementById("button1").onclick = function() {
+        document.body.style.backgroundColor = "blue";
+    };
+
+    document.getElementById("button2").ondblclick = function() {
+        document.body.style.backgroundColor = "pink";
+    };
+
+    let button3 = document.getElementById("button3");
+    button3.onmousedown = function() {
+        document.body.style.backgroundColor = "brown";
+    };
+    button3.onmouseup = function() {
+        document.body.style.backgroundColor = "white";
+    };
+
+    let link = document.getElementById("link");
+    link.onmouseover = function() {
+        document.body.style.backgroundColor = "yellow";
+    };
+    link.onmouseout = function() {
+        document.body.style.backgroundColor = "white";
+    };
+</script>
+
+<hr>
+
+<h2>Завдання 4: Видалення елемента</h2>
+<select id="mySelect">
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+</select>
+<button onclick="removeOption()">Remove selected option</button>
+
+<script>
+    function removeOption() {
+        let select = document.getElementById("mySelect");
+        select.remove(select.selectedIndex);
+    }
+</script>
+
+<hr>
+
+<h2>Завдання 5: Повідомлення при натисканні</h2>
+<button id="messageButton">Click me</button>
+
+<script>
+    let messageButton = document.getElementById("messageButton");
+    messageButton.onclick = function() {
+        alert("I was pressed!");
+    };
+
+    messageButton.onmouseover = function() {
+        alert("Mouse on me!");
+    };
+
+    messageButton.onmouseout = function() {
+        alert("Mouse is not on me!");
+    };
+</script>
+
+<hr>
+
+<h2>Завдання 6: Відслідковування зміни розміру вікна</h2>
+<div id="resizeInfo"></div>
+
+<script>
+    window.onresize = function() {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        document.getElementById("resizeInfo").innerHTML = `Width: ${width}px, Height: ${height}px`;
+    };
+</script>
+
+<hr>
+
+<h2>Завдання 7: Динамічний список країн та міст</h2>
+<select name="country" id="country">
+    <option value="ger">Germany</option>
+    <option value="usa">USA</option>
+    <option value="ukr">Ukraine</option>
+</select>
+
+<select name="cities" id="cities"></select>
+<p id="selectedInfo"></p>
+
+<script>
+    const countries = {
+        ger: ['Berlin', 'Munich', 'Hamburg'],
+        usa: ['New York', 'Los Angeles', 'Chicago'],
+        ukr: ['Kyiv', 'Lviv', 'Odessa']
+    };
+
+    document.getElementById("country").onchange = function() {
+        const country = this.value;
+        const cities = countries[country] || [];
+        const citiesSelect = document.getElementById("cities");
+        citiesSelect.innerHTML = "";
+
+        cities.forEach(city => {
+            let option = document.createElement("option");
+            option.value = city;
+            option.textContent = city;
+            citiesSelect.appendChild(option);
+        });
+
+        const selectedCountry = document.getElementById("country").options[document.getElementById("country").selectedIndex].text;
+        document.getElementById("selectedInfo").innerHTML = `Selected country: ${selectedCountry}, Selected city: ${cities[0] || ''}`;
+    };
+
+    document.getElementById("cities").onchange = function() {
+        const selectedCity = this.value;
+        document.getElementById("selectedInfo").innerHTML = `Selected country: ${document.getElementById("country").value}, Selected city: ${selectedCity}`;
+    };
+</script>
+
+</body>
+</html>
