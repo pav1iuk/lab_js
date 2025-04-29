@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>ВСЕ ДЛЯ ДОМУ</title>
+</head>
+<body>
+<h2 id="line1" style="background: yellow; color: black; cursor: pointer;">Доступ до властивостей і методів</h2>
+<p style="background: white; color: red; cursor: pointer;">Колекція all</p>
+<div id="line3" style="background: yellow; color: black; cursor: pointer;">Метод getElementById ()</div>
+
+<script>
+    document.getElementById("line1").onclick = function () {
+        let el = this;
+        el.style.color = (el.style.color === "black") ? "white" : "black";
+        el.style.background = (el.style.background === "yellow") ? "blue" : "yellow";
+    };
+
+    document.all[1].onclick = function () {
+        let el = this;
+        el.style.color = (el.style.color === "red") ? "white" : "red";
+        el.style.background = (el.style.background === "white") ? "green" : "white";
+    };
+
+    document.getElementById("line3").onclick = function () {
+        let el = this;
+        el.style.color = (el.style.color === "black") ? "white" : "black";
+        el.style.background = (el.style.background === "yellow") ? "blue" : "yellow";
+    };
+</script>
+
+<h2>Головна сторінка мережі магазинів</h2>
+<ul>
+    <li><a href="posud.html">Магазин "Посуд"</a></li>
+    <li><a href="mebli.html">Магазин "Меблі"</a></li>
+</ul>
+</body>
+</html>
