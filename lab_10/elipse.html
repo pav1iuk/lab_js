@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Побудова еліпса</title>
+</head>
+<body>
+<h2>Побудова еліпса</h2>
+<label>Велика піввісь (a): <input type="number" id="a" value="100"></label><br>
+<label>Мала піввісь (b): <input type="number" id="b" value="60"></label><br><br>
+<button onclick="drawEllipse()">Побудувати</button>
+<br><br>
+<canvas id="canvas" width="500" height="400" style="border:1px solid black;"></canvas>
+
+<script>
+    function drawEllipse() {
+        let a = parseFloat(document.getElementById("a").value);
+        let b = parseFloat(document.getElementById("b").value);
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
+            let x = a * Math.cos(t);
+            let y = b * Math.sin(t);
+            if (t === 0) {
+                ctx.moveTo(250 + x, 200 + y);
+            } else {
+                ctx.lineTo(250 + x, 200 + y);
+            }
+        }
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.ellipse(250, 200, a, b, 0, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        for (let i = 0; i <= 360; i++) {
+            let angle = i * Math.PI / 180;
+            let x = a * Math.cos(angle);
+            let y = b * Math.sin(angle);
+            if (i === 0) {
+                ctx.moveTo(250 + x, 200 + y);
+            } else {
+                ctx.lineTo(250 + x, 200 + y);
+            }
+        }
+        ctx.stroke();
+    }
+</script>
+</body>
+</html>

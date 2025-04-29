@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Галерея фото</title>
+</head>
+<body>
+<h2>Виберіть фотографію</h2>
+<select onchange="changePhoto(this.value)">
+    <option value="">-- Оберіть --</option>
+    <option value="lis">Ліс</option>
+    <option value="misto">Місто</option>
+    <option value="more">Море</option>
+</select>
+<br><br>
+<img id="photoViewer" width="400" height="550">
+
+<script>
+    var photo = new Array();
+    photo["les"] = new Image(400, 550);
+    photo["les"].src = "les.jpg";
+    photo["misto"] = new Image(400, 550);
+    photo["misto"].src = "misto.jpg";
+    photo["more"] = new Image(400, 550);
+    photo["more"].src = "more.jpg";
+
+    function changePhoto(name) {
+        if (photo[name]) {
+            document.getElementById("photoViewer").src = photo[name].src;
+        } else {
+            document.getElementById("photoViewer").src = "";
+        }
+    }
+</script>
+</body>
+</html>
