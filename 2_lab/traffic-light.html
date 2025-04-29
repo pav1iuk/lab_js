@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лампочка і Світлофор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+
+        #lamp {
+            width: 100px;
+            height: 150px;
+            background-color: white;
+            border-radius: 50% 50% 45% 45%;
+            margin: 20px auto;
+            border: 2px solid #aaa;
+            box-shadow: 0 0 10px #999;
+            transition: background-color 0.3s;
+        }
+
+        .traffic-light {
+            width: 80px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 0 auto;
+        }
+
+        .light {
+            width: 50px;
+            height: 50px;
+            background-color: #555;
+            margin: 15px auto;
+            border-radius: 50%;
+            transition: background-color 0.5s;
+        }
+
+        .red.on {
+            background-color: red;
+        }
+
+        .yellow.on {
+            background-color: yellow;
+        }
+
+        .green.on {
+            background-color: green;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>5.1. Лампочка</h2>
+<div id="lamp"></div>
+<div style="text-align: center;">
+    <button onclick="turnOn()">Ввімкнути</button>
+    <button onclick="turnOff()">Вимкнути</button>
+</div>
+
+<h2>5.2. Світлофор</h2>
+<div class="traffic-light">
+    <div class="light red" id="red"></div>
+    <div class="light yellow" id="yellow"></div>
+    <div class="light green" id="green"></div>
+</div>
+<div style="text-align: center; margin-top: 10px;">
+    <button onclick="nextLight()">Наступний колір</button>
+</div>
+
+<script>
+    function turnOn() {
+        document.getElementById('lamp').style.backgroundColor = 'yellow';
+    }
+
+    function turnOff() {
+        document.getElementById('lamp').style.backgroundColor = 'white';
+    }
+
+    let current = 0;
+    const lights = ['red', 'yellow', 'green'];
+
+    function nextLight() {
+
+        lights.forEach(id => document.getElementById(id).classList.remove('on'));
+
+        const currentLight = lights[current];
+        document.getElementById(currentLight).classList.add('on');
+
+        current = (current + 1) % lights.length;
+    }
+</script>
+
+</body>
+</html>
