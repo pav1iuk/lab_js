@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання на JavaScript та jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<h2 class="head">header1</h2>
+<h2 class="head">header2 <span class="inner">inner elem1</span></h2>
+<h2>header3</h2>
+<h2 class="head">header4<span>inner elem2</span></h2>
+<h2>header5</h2>
+
+<a href="https://example.com">Посилання 1</a>
+<a href="https://google.com">Посилання 2</a>
+<a href="mailto:test@example.com">Посилання 3</a>
+
+<h3>header1</h3>
+<div>text1</div>
+<h3>header2</h3>
+<div>text2</div>
+
+<div>
+    <input type="checkbox" id="checkbox1"> Чекбокс 1
+    <input type="checkbox" id="checkbox2"> Чекбокс 2
+    <input type="checkbox" id="checkbox3"> Чекбокс 3
+    <input type="checkbox" id="checkbox4"> Чекбокс 4
+    <input type="checkbox" id="checkbox5"> Чекбокс 5
+    <input type="checkbox" id="checkbox6"> Чекбокс 6
+</div>
+
+<div id="output" class="output"></div>
+
+<script>
+    // Завдання 1: Додавання атрибута target="_blank" для посилань, що починаються на https://
+    $('a[href^="https://"]').attr('target', '_blank');
+
+    // Завдання 2: Зміна кольору фону для h2 з класом "head" та розміру шрифту для елементів з класом "inner"
+    $('.head').css('background-color', 'green');
+    $('.inner').css('font-size', '35px');
+
+    // Завдання 3: Переміщення <div> елементів так, щоб вони були безпосередньо перед <h3>
+    $('h3').each(function () {
+        var div = $(this).next('div');
+        $(this).before(div);
+    });
+
+    // Завдання 4: Отключення чекбоксів після того, як обрано 3
+    var checkboxCount = 0;
+    $('input[type="checkbox"]').on('change', function () {
+        checkboxCount = $('input[type="checkbox"]:checked').length;
+        if (checkboxCount >= 3) {
+            $('input[type="checkbox"]').prop('disabled', true);
+        }
+    });
+
+    // Завдання 5: Деструктуризація масиву
+    let arr = ["Tom", "Sam", "Ray", "Bob"];
+    let [x, y, ...z] = arr;
+    $('#output').append(`<p>x: ${x}</p>`);
+    $('#output').append(`<p>y: ${y}</p>`);
+    $('#output').append(`<p>z: ${JSON.stringify(z)}</p>`);
+
+    // Завдання 6: Деструктуризація об'єкта
+    let data = {
+        names: ["Sam", "Tom", "Ray", "Bob"],
+        ages: [20, 24, 22, 26],
+    };
+    let { names: [name2, , , name4], ages: [, age2, , age4] } = data;
+    $('#output').append(`<p>name2: ${name2}</p>`);
+    $('#output').append(`<p>age2: ${age2}</p>`);
+    $('#output').append(`<p>name4: ${name4}</p>`);
+    $('#output').append(`<p>age4: ${age4}</p>`);
+
+    // Завдання 7: Функція mul() для множення параметрів
+    function mul(...args) {
+        return args.filter(arg => typeof arg === 'number').reduce((acc, val) => acc * val, 1) || 0;
+    }
+    $('#output').append(`<p>mul(1, "str", 2, 3, true): ${mul(1, "str", 2, 3, true)}</p>`);
+    $('#output').append(`<p>mul(null, "str", false, true): ${mul(null, "str", false, true)}</p>`);
+
+    // Завдання 8: Переробка функцій на стрілкові для усунення використання bind()
+    let server = {
+        data: 0,
+        convertToString(callback) {
+            callback(() => this.data + "");
+        }
+    };
+    let client = {
+        server: server,
+        result: "",
+        calc(data) {
+            this.server.data = data;
+            this.server.convertToString(this.notification());
+        },
+        notification: function () {
+            return callback => {
+                this.result = callback();
+            };
+        }
+    };
+    client.calc(123);
+    $('#output').append(`<p>client.result: ${client.result}</p>`);
+    $('#output').append(`<p>typeof client.result: ${typeof client.result}</p>`);
+
+    // Завдання 9: Функція mapBuilder для створення Map з двох масивів
+    function mapBuilder(keysArray, valuesArray) {
+        let map = new Map();
+        keysArray.forEach((key, index) => {
+            map.set(key, valuesArray[index]);
+        });
+        return map;
+    }
+
+    let keys = [1, 2, 3, 4];
+    let values = ["div", "span", "b", "i"];
+    let map = mapBuilder(keys, values);
+    $('#output').append(`<p>map.size: ${map.size}</p>`);
+    $('#output').append(`<p>map.get(2): ${map.get(2)}</p>`);
+
+</script>
+
+</body>
+</html>
